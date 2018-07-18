@@ -47,7 +47,8 @@ set<pair<COutPoint, unsigned int> > setStakeSeen;
 
 CBigNum bnProofOfStakeLimit(~uint256(0) >> 20);
 
-unsigned int nStakeMinAge = 2 * 60; // 12 hours
+unsigned int nStakeMinAge = 12 * 60 * 60; // 12 hours
+
 unsigned int nModifierInterval = 240; // time to elapse before new modifier is computed
 
 int nCoinbaseMaturity = 29;
@@ -1363,7 +1364,7 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
       nSubsidy = 75000 * COIN;
     } else if (nHeight > 11 && nHeight <= 2520){
       nSubsidy = 0 * COIN;
-    } else if (nHeight > 2520 && nHeight <= 5450){
+    } else if (nHeight > 2520 && nHeight <= 5500){
       nSubsidy = 0.01 * COIN;
     }
 
@@ -1378,21 +1379,39 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
     if((nBestHeight + 1) >= 20){
         if((nBestHeight +1) % 3 == 0){
             if((nBestHeight +1) % 5 == 0){
-                nSubsidy = 24 * COIN;
+                if(GetAdjustedTime() >= 1531969200 && GetAdjustedTime() <= 1532314800){
+                      nSubsidy = 50 * COIN;
+                    }else{
+                        nSubsidy = 24 * COIN;
+                    }
             } else{
-                nSubsidy = 19 * COIN;
+                if(GetAdjustedTime() >= 1531969200 && GetAdjustedTime() <= 1532314800){
+                  nSubsidy = 50 * COIN;
+                }else{
+                    nSubsidy = 19 * COIN;
+                }
             }
         }else if((nBestHeight + 1) % 5 == 0){
             if((nBestHeight + 1) % 3 == 0){
-                nSubsidy = 24 * COIN;
+                if(GetAdjustedTime() >= 1531969200 && GetAdjustedTime() <= 1532314800){
+                  nSubsidy = 50 * COIN;
+                }else{
+                    nSubsidy = 24 * COIN;
+                }
             }else{
-                nSubsidy = 13 * COIN;
+                if(GetAdjustedTime() >= 1531969200 && GetAdjustedTime() <= 1532314800){
+                  nSubsidy = 50 * COIN;
+                }else{
+                    nSubsidy = 13 * COIN;
+                }
             }
         }else{
-            nSubsidy = 10 * COIN;
+            if(GetAdjustedTime() >= 1531969200 && GetAdjustedTime() <= 1532314800){
+              nSubsidy = 50 * COIN;
+            }else{
+                nSubsidy = 10 * COIN;
+            }
         }
-    } else if(GetAdjustedTime() >= 1531875600 && GetAdjustedTime() <= 1532134800){
-      nSubsidy = 50 * COIN;
     } else {
       nSubsidy = 0 * COIN;
     }
