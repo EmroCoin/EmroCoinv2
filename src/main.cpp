@@ -1379,13 +1379,13 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
     if((nBestHeight + 1) >= 20){
         if((nBestHeight +1) % 3 == 0){
             if((nBestHeight +1) % 5 == 0){
-                if(GetAdjustedTime() >= 1531969200 && GetAdjustedTime() <= 1532314800){
+                if(nBestHeight + 1 >= 5462 && nBestHeight + 1 <= 6243){
                       nSubsidy = 50 * COIN;
                     }else{
                         nSubsidy = 24 * COIN;
                     }
             } else{
-                if(GetAdjustedTime() >= 1531969200 && GetAdjustedTime() <= 1532314800){
+                if(nBestHeight + 1 >= 5462 && nBestHeight + 1 <= 6243){
                   nSubsidy = 50 * COIN;
                 }else{
                     nSubsidy = 19 * COIN;
@@ -1393,26 +1393,30 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
             }
         }else if((nBestHeight + 1) % 5 == 0){
             if((nBestHeight + 1) % 3 == 0){
-                if(GetAdjustedTime() >= 1531969200 && GetAdjustedTime() <= 1532314800){
+                if(nBestHeight + 1 >= 5462 && nBestHeight + 1 <= 6243){
                   nSubsidy = 50 * COIN;
                 }else{
                     nSubsidy = 24 * COIN;
                 }
             }else{
-                if(GetAdjustedTime() >= 1531969200 && GetAdjustedTime() <= 1532314800){
+                if(nBestHeight + 1 >= 5462 && nBestHeight + 1 <= 6243){
                   nSubsidy = 50 * COIN;
                 }else{
                     nSubsidy = 13 * COIN;
                 }
             }
         }else{
-            if(GetAdjustedTime() >= 1531969200 && GetAdjustedTime() <= 1532314800){
-              nSubsidy = 50 * COIN;
-            }else{
+            if (nBestHeight + 1 >= 5462 && nBestHeight + 1 <= 6243) {
+		nSubsidy = 50 * COIN;
+	    } else{
                 nSubsidy = 10 * COIN;
             }
         }
-    } else {
+    } else if(nBestHeight + 1 >= 5462 && nBestHeight + 1 <= 6243){
+      nSubsidy = 50 * COIN;
+    }
+      else
+    {
       nSubsidy = 0 * COIN;
     }
 
